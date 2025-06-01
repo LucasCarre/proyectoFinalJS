@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -10,7 +11,17 @@
     <main>
         <h1>Bienvenidos a HinchaStore</h1> <!--Nombre de la web-->
         <h2>Donde el hincha encuentra su camiseta</h2> <!--Slogan-->
-        <p>Intente crear un simulador que permite agregar camisetas de futbol al carrito, calcular el total, confirmar la compra y elegir el metodo de pago. La interacción se realiza mediante la consola y cuadros de diálogo. Se recomienda para una mejor experiencia de uso, abrir la consola del navegador y colocarla del lado izquierdo de la pantalla. Para que funcione el simulador debe llamar a la funcion menuOpciones() en el archivo codigo.js </p>
+        <h3>Nuestra lista de camisetas:</h3>
+            <button class="btn">Mostrar productos</button>
+            <button class="btn">Ocultar productos</button>
+        <section class="boxes" id="productos"> 
+        </section>
+        <h3>Carrito de compras</h3>
+        <section>
+            <div id="carrito">
+            </div>
+            <button id="vaciarCarrito">Vaciar carrito</button>
+        </section>
     </main>
     <footer></footer>
     <script src="codigo.js"></script>

@@ -21,18 +21,18 @@ const camisetas = [
     {id: 20, equipo: "Camiseta Boca", temporada: "2011", precio: 45000},
 ]
 
-let carrito = []
 
-function mostrarCamisetas(){
+
+/* function mostrarCamisetas(){
     console.log('ESTAS SON NUESTRAS CAMISETAS DISPONIBLES: \n')
     for (let i=0; i<camisetas.length; i++){
         let producto = camisetas[i];
         console.log(`Id: ${producto.id} - ${producto.equipo} - $${producto.precio}\n`); 
     }
 }
+*/
 
-
-function agregarAlCarrito(){
+/* function agregarAlCarrito(){
     let seleccion = parseInt(prompt('Ingrese el Id de la camiseta que desea agregar al carrito:'));
     let camisetaSeleccionada = false;
     for (let i=0; i<camisetas.length; i++){
@@ -44,8 +44,8 @@ function agregarAlCarrito(){
             console.log('ID Invalido. Camiseta no encontrada');
         }
     }
-}
-function mostrarCarrito(){
+} */
+/* function mostrarCarrito(){
     if(carrito.length === 0){
         console.log('Carrito Vacio');
         return;
@@ -59,9 +59,9 @@ function mostrarCarrito(){
         console.log(`*- ${carrito[i].equipo} - $${carrito[i].precio}`)
     }
     console.log(`Total de tu compra: $${total}`);
-}
+} */
 
-function formaDeCompra(){
+function mostrarOpcionesDePago(){
     let metodoDePago = false;
     while (!metodoDePago) {
         let pago = parseInt(prompt('¿Como desea pagar? \n1. Efectivo\n2. Transferencia\n3. Tarjeta'))
@@ -83,7 +83,7 @@ function formaDeCompra(){
     }
 }
 
-function menuOpciones(){
+/* function menuOpciones(){
     mostrarCamisetas();
     let salir = false
     while (!salir) {
@@ -93,7 +93,7 @@ function menuOpciones(){
             } else if (opciones === 2){
                 mostrarCarrito();
             } else if(opciones === 3){
-                formaDeCompra();
+                mostrarOpcionesDePago();
             } else if(opciones===4) {
                 let confirmarSalida = confirm('¿Estás seguro que querés salir?');
                 if (confirmarSalida) {
@@ -104,3 +104,87 @@ function menuOpciones(){
             }
         }
     }
+    mostrarCamisetas() */
+
+    const nodoProductos = document.getElementById('productos')
+    let carrito = []
+    
+    function mostrarCamisetas(){
+        nodoProductos.innerHTML = "";
+        camisetas.forEach((camiseta)=> nodoProductos.innerHTML +=
+        `<div class='card'>
+            <h4>${camiseta.equipo}</h4>
+            <p>Precio: $${camiseta.precio}</p>
+            <button class='botonCarrito'>Agregar al carrito</button>
+            <button> Ver más </button>
+        </div>
+        `)
+    
+
+        const botones = document.querySelectorAll(".botonCarrito");
+        botones.forEach((boton, i) => {
+        boton.addEventListener("click", () => {
+        agregarAlCarrito(camisetas[i]); 
+        });
+        });
+    }
+    function agregarAlCarrito(producto) {
+        carrito.push(producto);
+        let confirmacion = confirm(`¿Desea agregar ${producto.equipo} al carrito?`);
+        if (confirmacion){
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        mostrarCarrito();
+        } else {
+            alert('El producto no fue agregado al carrito')
+            carrito.pop();
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+        
+}
+    
+    
+    const nodoBotones = document.getElementsByClassName('btn')
+    nodoBotones[0].addEventListener('click', ()=>{
+        mostrarCamisetas();
+    });
+    nodoBotones[1].addEventListener('click', ()=>{
+        nodoProductos.innerHTML = '';
+    })
+
+    const nodoCarrito = document.getElementById("carrito");
+    function mostrarCarrito(){
+        nodoCarrito.innerHTML = "";
+        if (carrito.length === 0) {
+        nodoCarrito.innerHTML = "<p>El carrito está vacío</p>";
+        return;
+    }
+    carrito.forEach((producto, i) => {
+        nodoCarrito.innerHTML += `
+            <div class='itemCarrito'>
+                <p>${producto.equipo} - $${producto.precio}</p>
+            </div>
+        `;
+    });
+    let total = 0
+    for (let i = 0; i<carrito.length;i++){
+        total += carrito[i].precio
+    }
+    nodoCarrito.innerHTML += `
+    <p>Total= $${total}</p>
+    `
+    }
+
+    const botonVaciarCarrito = document.getElementById("vaciarCarrito");
+    botonVaciarCarrito.addEventListener("click", () => {
+    if (carrito.length === 0) {
+        alert("El carrito ya está vacío.");
+        return;
+    }
+    const confirmacionVaciar = confirm("¿Estás seguro de que querés vaciar el carrito?");
+    if (confirmacionVaciar) {
+        carrito = [];
+        localStorage.removeItem("carrito");
+        mostrarCarrito();
+        alert("Carrito vaciado con éxito.");
+    }
+}); 
