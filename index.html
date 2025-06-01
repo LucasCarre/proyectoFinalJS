@@ -4,23 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Forum&display=swap');</style>
     <title>Document</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <nav class="navbar">
+            <div class="navbarItems">
+                <h1 class="forum-regular">~ HINCHA ST⚽​RE ~</h1>
+                <div>
+                    <button id="btnIniciarSesion">Iniciar Sesion</button>
+                    <button id="btnRegistro">Registrarse</button>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main>
         <h1>Bienvenidos a HinchaStore</h1> <!--Nombre de la web-->
         <h2>Donde el hincha encuentra su camiseta</h2> <!--Slogan-->
         <h3>Nuestra lista de camisetas:</h3>
             <button class="btn">Mostrar productos</button>
             <button class="btn">Ocultar productos</button>
+            <div id="botonesDeOrden">
+                <button id="ordenAlfabetico">Ordenar alfabeticamente</button>
+                <button id="ordenPrecio">Ordenar por precio(menor a mayor)</button>
+                <button id="ordenTemporada">Ordenar por temporada</button>
+            </div>
         <section class="boxes" id="productos"> 
         </section>
         <h3>Carrito de compras</h3>
-        <section>
+        <section class="carritoDeCompras">
             <div id="carrito">
             </div>
             <button id="vaciarCarrito">Vaciar carrito</button>
+            <button id="metodoDePago">Pagar</button>
         </section>
     </main>
     <footer></footer>

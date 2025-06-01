@@ -11,3 +11,22 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
 }
+.forum-regular {
+    font-family: "Forum", serif;
+    font-style: normal;
+}
+
+/* Navbar */
+.navbar{
+    background-color:rgb(197, 197, 197);
+}
+.navbarItems{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Carrito */
+.carritoDeCompras{
+    background-color: rgb(197, 197, 197);
+}
