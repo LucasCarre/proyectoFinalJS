@@ -15,6 +15,13 @@
     font-family: "Forum", serif;
     font-style: normal;
 }
+.titulos{
+    font-family: "Forum", serif;
+    font-style: normal;
+    background-color: rgb(197, 197, 197);
+    display: flex;
+    justify-content: center;
+}
 
 /* Navbar */
 .navbar{
