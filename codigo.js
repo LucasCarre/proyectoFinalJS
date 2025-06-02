@@ -205,6 +205,7 @@ const camisetas = [
 
 const btnRegistro = document.getElementById('btnRegistro')
 const btnIniciarSesion = document.getElementById('btnIniciarSesion')
+const nodoBotonesDeUsuario = document.getElementById('botonesDeUsuario')
 let usuariosGuardados = localStorage.getItem('usuarios')
 let usuarios
     if (usuariosGuardados !== null) {
@@ -237,7 +238,10 @@ btnIniciarSesion.addEventListener('click', () =>{
     if (buscarUsuario) {
         let contraseña = prompt("Ingrese su contraseña")
             if (contraseña === buscarUsuario.contraseña) {
-        alert("Bienvenid@ "+ usuario +" Sesion iniciada con exito");
+            alert("Bienvenid@ "+ usuario +" Sesion iniciada con exito");
+                nodoBotonesDeUsuario.innerHTML = `
+                <p>User: ${usuario}</p>
+                `
             } else {
             alert("Contraseña incorrecta");
             }
