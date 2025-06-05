@@ -103,17 +103,6 @@ const camisetas = [
         alert("Carrito vaciado con éxito.");
     }
 
-    const botonPagar = document.getElementById('metodoDePago')
-    botonPagar.addEventListener('click', () =>{
-        if (carrito.length === 0) {
-            alert("No hay productos para pagar en el carrito.");
-            return;
-            }
-            const confirmacionPago = confirm("¿Desea proseguir al pago?");
-            if (confirmacionPago) {
-                alert("A continuacion sera redirigido para realizar el pago, MUCHAS GRACIAS POR SU ELEGIRNOS ⚽⚽");
-            }
-    })
 }); 
 
 
@@ -121,31 +110,30 @@ const btnRegistro = document.getElementById('btnRegistro')
 const btnIniciarSesion = document.getElementById('btnIniciarSesion')
 const nodoBotonesDeUsuario = document.getElementById('botonesDeUsuario')
 let usuariosGuardados = localStorage.getItem('usuarios')
-let usuarios
-    if (usuariosGuardados !== null) {
+let usuarios = []
+
+if (usuariosGuardados !== null) {
     usuarios = JSON.parse(usuariosGuardados)
-    } else {
+} else {
     usuarios = []
-    }
+}
 
-
-//Funcion para registrar usuario
 btnRegistro.addEventListener('click', () => {
     let usuario = prompt("Ingrese su nombre de usuario")
-    let contraseña = prompt("Ingrese su contraseña")
-
     const existe = usuarios.find(u => u.usuario === usuario)
-    if (existe) {
-        alert("Este usuario ya está registrado.")
-        return
+    if (!existe) {
+        let contraseña = prompt("Ingrese su contraseña")
+        usuarios.push({ usuario, contraseña })
+        localStorage.setItem('usuarios', JSON.stringify(usuarios))
+        // Actualizar nombresDeUsuarios y guardarlos
+        nombresDeUsuarios.push(usuario)
+        localStorage.setItem('nombresDeUsuarios', JSON.stringify(nombresDeUsuarios))
+        alert("Registro exitoso")
+    } else {
+        alert("El usuario ya existe")
     }
+    })
 
-    usuarios.push({ usuario, contraseña })
-    localStorage.setItem('usuarios', JSON.stringify(usuarios))
-    alert("Registro exitoso")
-})
-
-//Funcion para iniciar sesion
 btnIniciarSesion.addEventListener('click', () =>{
     let usuario = prompt("Ingrese su nombre de usuario");
     const buscarUsuario = usuarios.find(u => u.usuario === usuario);
@@ -181,3 +169,15 @@ btnIniciarSesion.addEventListener('click', () =>{
         const camisetasOrdenadas = camisetas.sort((a,b)=>a.temporada - b.temporada);
         mostrarCamisetas(camisetasOrdenadas);
     })
+
+    const botonPagar = document.getElementById('metodoDePago')
+    botonPagar.addEventListener('click', () =>{
+        if (carrito.length === 0) {
+            alert("No hay productos para pagar en el carrito.");
+            return;
+        }
+        const confirmacionPago = confirm("¿Desea proseguir al pago?");
+        if (confirmacionPago) {
+            alert("A continuacion sera redirigido para realizar el pago, MUCHAS GRACIAS POR SU ELEGIRNOS ⚽⚽");
+        }
+    });
