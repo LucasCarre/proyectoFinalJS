@@ -1,10 +1,10 @@
-.card{
-    width: 250px;
-    height: 150px;
-    border: 2px gray solid;
+.cardPersonalizada{
+    width: auto;
+    height: auto;
+    border: 2px #5C5B5A solid;
     padding: 10px;
     margin: 5px;
-    background-color: rgb(197, 197, 197);
+    background-color: #858382;
 }
 .boxes{
     display: grid;
@@ -14,18 +14,21 @@
 .forum-regular {
     font-family: "Forum", serif;
     font-style: normal;
+    color: black;
 }
 .titulos{
     font-family: "Forum", serif;
     font-style: normal;
-    background-color: rgb(197, 197, 197);
+    color: black;
+    background-color: #858382;
     display: flex;
     justify-content: center;
 }
 
 /* Navbar */
-.navbar{
-    background-color:rgb(197, 197, 197);
+.navbarPer{
+    background-color:#858382;
+    margin-bottom: 5px;
 }
 .navbarItems{
     display: flex;
@@ -35,5 +38,31 @@
 
 /* Carrito */
 .carritoDeCompras{
-    background-color: rgb(197, 197, 197);
+    background-color: #858382;
+}
+
+p{
+    color: black;
+}
+.titulosCards{
+    color: black;
+}
+.tituloProductos{
+    font-family: "Forum", serif;
+    font-style: normal;
+    text-decoration: underline;
+    color: black;
+    background-color: #858382;
+}
+.tituloCarrito{
+    font-family: "Forum", serif;
+    font-style: normal;
+    text-decoration: underline;
+    color: black;
+    background-color: #858382;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.tituloCarrito p{
+    color: black;
 }

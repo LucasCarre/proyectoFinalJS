@@ -26,8 +26,8 @@ const camisetas = [
     function mostrarCamisetas(){
         nodoProductos.innerHTML = "";
         camisetas.forEach((camiseta)=> nodoProductos.innerHTML +=
-        `<div class='card'>
-            <h4>${camiseta.equipo}</h4>
+        `<div class='cardPersonalizada'>
+            <h4 class='titulosCards'>${camiseta.equipo}</h4>
             <p>Precio: $${camiseta.precio}</p>
             <p>Temporada: ${camiseta.temporada}</p>
             <button class='botonCarrito'>Agregar al carrito</button>
@@ -58,7 +58,7 @@ const camisetas = [
 }
     
     
-    const nodoBotones = document.getElementsByClassName('btn')
+    const nodoBotones = document.getElementsByClassName('btnPer')
     nodoBotones[0].addEventListener('click', ()=>{
         mostrarCamisetas();
     });
@@ -106,6 +106,7 @@ const camisetas = [
 }); 
 
 
+// Botones de usuario
 const btnRegistro = document.getElementById('btnRegistro')
 const btnIniciarSesion = document.getElementById('btnIniciarSesion')
 const nodoBotonesDeUsuario = document.getElementById('botonesDeUsuario')
@@ -170,6 +171,8 @@ btnIniciarSesion.addEventListener('click', () =>{
         mostrarCamisetas(camisetasOrdenadas);
     })
 
+
+    // Boton de pago
     const botonPagar = document.getElementById('metodoDePago')
     botonPagar.addEventListener('click', () =>{
         if (carrito.length === 0) {
