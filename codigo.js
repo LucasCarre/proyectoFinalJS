@@ -1,71 +1,49 @@
-const camisetas = [
-    {id: 1, equipo: "Camiseta Talleres", temporada: 2025, precio: 70000},
-    {id: 2, equipo: "Camiseta Belgrano", temporada: 2025, precio: 60000},
-    {id: 3, equipo: "Camiseta Instituto", temporada: 2025, precio: 50000},
-    {id: 4, equipo: "Camiseta Boca", temporada: 2025, precio: 90500},
-    {id: 5, equipo: "Camiseta River", temporada: 2025, precio: 90000},
-    {id: 6, equipo: "Camiseta Racing", temporada: 2025, precio: 80000},
-    {id: 7, equipo: "Camiseta Independiente", temporada: 2025, precio: 90000},
-    {id: 8, equipo: "Camiseta San Lorenzo", temporada: 2025, precio: 70800},
-    {id: 9, equipo: "Camiseta Estudiantes", temporada: 2025, precio: 65000},
-    {id: 10, equipo: "Camiseta Talleres", temporada: 2024, precio: 50000},
-    {id: 11, equipo: "Camiseta Boca", temporada: 2024, precio: 70200},
-    {id: 12, equipo: "Camiseta River", temporada: 2024, precio: 65500},
-    {id: 13, equipo: "Camiseta Racing", temporada: 2024, precio: 60000},
-    {id: 14, equipo: "Camiseta Independiente", temporada: 2024, precio: 65000},
-    {id: 15, equipo: "Camiseta San Lorenzo", temporada: 2024, precio: 48700},
-    {id: 16, equipo: "Camiseta Belgrano", temporada: 2024, precio: 30000},
-    {id: 17, equipo: "Camiseta Instituto", temporada: 2024, precio: 25000},
-    {id: 18, equipo: "Camiseta Boca", temporada: 2008, precio: 55800},
-    {id: 19, equipo: "Camiseta River", temporada: 2018, precio: 85000},
-    {id: 20, equipo: "Camiseta Boca", temporada: 2011, precio: 45000},
-]
+    const url = 'https://685dccea7b57aebd2af727cb.mockapi.io/listaCamisetas/v1/camisetas'
     const nodoProductos = document.getElementById('productos')
+    let camisetas = []
     let carrito = []
-    
-    function mostrarCamisetas(){
-        nodoProductos.innerHTML = "";
-        camisetas.forEach((camiseta)=> nodoProductos.innerHTML +=
-        `<div class='cardPersonalizada'>
-            <h4 class='titulosCards'>${camiseta.equipo}</h4>
-            <p>Precio: $${camiseta.precio}</p>
-            <p>Temporada: ${camiseta.temporada}</p>
+
+    fetch(url)
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        camisetas = data;
+        nodoProductos.innerHTML='';
+        data.forEach(producto=>{
+            nodoProductos.innerHTML += `
+            <div class='cardPersonalizada'>
+            <h4 class='titulosCards'>${producto.equipo}</h4>
+            <p>Precio: $${producto.precio}</p>
+            <p>Temporada: ${producto.temporada}</p>
+            <img class="img-camiseta" src="${producto.img}" alt="${producto.equipo}">
             <button class='botonCarrito'>Agregar al carrito</button>
             <button> Ver más </button>
-        </div>
-        `)
-    
-
+            </div>
+            `
+        })
         const botones = document.querySelectorAll(".botonCarrito");
         botones.forEach((boton, i) => {
         boton.addEventListener("click", () => {
         agregarAlCarrito(camisetas[i]); 
         });
         });
-    }
-    function agregarAlCarrito(producto) {
-        carrito.push(producto);
-        let confirmacion = confirm(`¿Desea agregar ${producto.equipo} al carrito?`);
-        if (confirmacion){
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-        mostrarCarrito();
-        } else {
-            alert('El producto no fue agregado al carrito')
-            carrito.pop();
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-        }
-        
-}
-    
-    
-    const nodoBotones = document.getElementsByClassName('btnPer')
-    nodoBotones[0].addEventListener('click', ()=>{
-        mostrarCamisetas();
-    });
-    nodoBotones[1].addEventListener('click', ()=>{
-        nodoProductos.innerHTML = '';
     })
 
+    // Funcion para agregar al carrito productos
+    function agregarAlCarrito(producto) {
+        carrito.push(producto);
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        mostrarCarrito();
+        Toastify({
+            text: `Producto ${producto.equipo}, agregado al carrito`,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#5C5B5A",
+        }).showToast();
+    }
+    
+
+    // Funcion para mostrar el carrito
     const nodoCarrito = document.getElementById("carrito");
     function mostrarCarrito(){
         nodoCarrito.innerHTML = "";
@@ -77,6 +55,7 @@ const camisetas = [
         nodoCarrito.innerHTML += `
             <div class='itemCarrito'>
                 <p>${producto.equipo} - $${producto.precio}</p>
+                <button class="eliminarProducto">Eliminar</button>
             </div>
         `;
     });
@@ -87,71 +66,26 @@ const camisetas = [
     nodoCarrito.innerHTML += `
     <p>Total= $${total}</p>
     `
+        // Boton para eliminar productos individualmente
+        const botonEliminarProducto = document.querySelectorAll(".eliminarProducto");
+        botonEliminarProducto.forEach((boton, i) => {
+        boton.addEventListener('click', () => {
+        if (carrito.length > 0) {
+            const productoEliminado = carrito[i];      
+            carrito.splice(i, 1);                      
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            mostrarCarrito();
+                Toastify({
+                text: `${productoEliminado.equipo} eliminado del carrito`,
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#ff5c5c",
+                }).showToast();
+                }
+            });
+        });
     }
-
-    const botonVaciarCarrito = document.getElementById("vaciarCarrito");
-    botonVaciarCarrito.addEventListener("click", () => {
-    if (carrito.length === 0) {
-        alert("El carrito ya está vacío.");
-        return;
-    }
-    const confirmacionVaciar = confirm("¿Estás seguro de que querés vaciar el carrito?");
-    if (confirmacionVaciar) {
-        carrito = [];
-        localStorage.removeItem("carrito");
-        mostrarCarrito();
-        alert("Carrito vaciado con éxito.");
-    }
-
-}); 
-
-
-// Botones de usuario
-const btnRegistro = document.getElementById('btnRegistro')
-const btnIniciarSesion = document.getElementById('btnIniciarSesion')
-const nodoBotonesDeUsuario = document.getElementById('botonesDeUsuario')
-let usuariosGuardados = localStorage.getItem('usuarios')
-let usuarios = []
-
-if (usuariosGuardados !== null) {
-    usuarios = JSON.parse(usuariosGuardados)
-} else {
-    usuarios = []
-}
-
-btnRegistro.addEventListener('click', () => {
-    let usuario = prompt("Ingrese su nombre de usuario")
-    const existe = usuarios.find(u => u.usuario === usuario)
-    if (!existe) {
-        let contraseña = prompt("Ingrese su contraseña")
-        usuarios.push({ usuario, contraseña })
-        localStorage.setItem('usuarios', JSON.stringify(usuarios))
-        // Actualizar nombresDeUsuarios y guardarlos
-        nombresDeUsuarios.push(usuario)
-        localStorage.setItem('nombresDeUsuarios', JSON.stringify(nombresDeUsuarios))
-        alert("Registro exitoso")
-    } else {
-        alert("El usuario ya existe")
-    }
-    })
-
-btnIniciarSesion.addEventListener('click', () =>{
-    let usuario = prompt("Ingrese su nombre de usuario");
-    const buscarUsuario = usuarios.find(u => u.usuario === usuario);
-    if (buscarUsuario) {
-        let contraseña = prompt("Ingrese su contraseña")
-            if (contraseña === buscarUsuario.contraseña) {
-            alert("Bienvenid@ "+ usuario +" Sesion iniciada con exito");
-                nodoBotonesDeUsuario.innerHTML = `
-                <p>User: ${usuario}</p>
-                `
-            } else {
-            alert("Contraseña incorrecta");
-            }
-        } else {
-            alert("Usuario no encontrado, por favor registrese previamente");
-            }
-    })
 
     // Botones de orden
     const btnOrdenAlfabetico = document.getElementById('ordenAlfabetico')
@@ -160,15 +94,15 @@ btnIniciarSesion.addEventListener('click', () =>{
 
     btnOrdenAlfabetico.addEventListener('click', ()=>{
         const camisetasOrdenadas = camisetas.sort((a,b)=> a.equipo.localeCompare(b.equipo));
-        mostrarCamisetas(camisetasOrdenadas);
+        camisetas(camisetasOrdenadas);
     })
     btnOrdenPrecio.addEventListener('click', ()=>{
         const camisetasOrdenadas = camisetas.sort((a,b)=>a.precio - b.precio);
-        mostrarCamisetas(camisetasOrdenadas);
+        camisetas(camisetasOrdenadas);
     })
     btnOrdenTemporada.addEventListener('click', ()=>{
         const camisetasOrdenadas = camisetas.sort((a,b)=>a.temporada - b.temporada);
-        mostrarCamisetas(camisetasOrdenadas);
+        camisetas(camisetasOrdenadas);
     })
 
 
@@ -184,3 +118,32 @@ btnIniciarSesion.addEventListener('click', () =>{
             alert("A continuacion sera redirigido para realizar el pago, MUCHAS GRACIAS POR SU ELEGIRNOS ⚽⚽");
         }
     });
+
+    
+    
+    //Boton para vaciar el carrito
+    const botonVaciarCarrito = document.getElementById("vaciarCarrito");
+        botonVaciarCarrito.addEventListener("click", () => {
+        if (carrito.length === 0) {
+                Toastify({
+                text: "El carrito ya está vacío.",
+                duration: 3000,
+                gravity: "bottom",
+                position: "right",
+                backgroundColor: "#ff5c5c",
+                }).showToast();
+                return;
+            }
+
+            carrito = [];
+            localStorage.removeItem("carrito");
+            mostrarCarrito();
+
+            Toastify({
+                text: "Carrito vaciado con éxito.",
+                duration: 3000,
+                gravity: "bottom",
+                position: "right",
+                backgroundColor: "#ff5c5c",
+            }).showToast();
+        });

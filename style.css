@@ -6,6 +6,14 @@
     margin: 5px;
     background-color: #858382;
 }
+.img-camiseta {
+    width: 180px;       /* Ancho fijo */
+    height: 180px;      /* Alto fijo */
+    object-fit: cover;  /* Recorta y centra sin deformar */
+    border-radius: 8px;
+    display: block;
+    margin: auto;
+}
 .boxes{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
