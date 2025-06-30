@@ -87,38 +87,6 @@
         });
     }
 
-    // Botones de orden
-    const btnOrdenAlfabetico = document.getElementById('ordenAlfabetico')
-    const btnOrdenPrecio = document.getElementById('ordenPrecio')
-    const btnOrdenTemporada = document.getElementById('ordenTemporada')
-
-    btnOrdenAlfabetico.addEventListener('click', ()=>{
-        const camisetasOrdenadas = camisetas.sort((a,b)=> a.equipo.localeCompare(b.equipo));
-        camisetas(camisetasOrdenadas);
-    })
-    btnOrdenPrecio.addEventListener('click', ()=>{
-        const camisetasOrdenadas = camisetas.sort((a,b)=>a.precio - b.precio);
-        camisetas(camisetasOrdenadas);
-    })
-    btnOrdenTemporada.addEventListener('click', ()=>{
-        const camisetasOrdenadas = camisetas.sort((a,b)=>a.temporada - b.temporada);
-        camisetas(camisetasOrdenadas);
-    })
-
-
-    // Boton de pago
-    const botonPagar = document.getElementById('metodoDePago')
-    botonPagar.addEventListener('click', () =>{
-        if (carrito.length === 0) {
-            alert("No hay productos para pagar en el carrito.");
-            return;
-        }
-        const confirmacionPago = confirm("¿Desea proseguir al pago?");
-        if (confirmacionPago) {
-            alert("A continuacion sera redirigido para realizar el pago, MUCHAS GRACIAS POR SU ELEGIRNOS ⚽⚽");
-        }
-    });
-
     
     
     //Boton para vaciar el carrito
