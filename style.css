@@ -4,7 +4,7 @@
     border: 2px #5C5B5A solid;
     padding: 10px;
     margin: 5px;
-    background-color: #858382;
+    background-color: white;
 }
 .img-camiseta {
     width: 180px;       /* Ancho fijo */
@@ -28,15 +28,20 @@
     font-family: "Forum", serif;
     font-style: normal;
     color: black;
-    background-color: #858382;
+    background-color:#008F8C;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px ;
 }
 
 /* Navbar */
 .navbarPer{
-    background-color:#858382;
+    background-color:#023535;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .navbarItems{
     display: flex;
@@ -45,8 +50,10 @@
 }
 
 /* Carrito */
-.carritoDeCompras{
-    background-color: #858382;
+.contenedorCarrito{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 p{
@@ -60,17 +67,11 @@ p{
     font-style: normal;
     text-decoration: underline;
     color: black;
-    background-color: #858382;
+    background-color: #008F8C;
 }
-.tituloCarrito{
-    font-family: "Forum", serif;
-    font-style: normal;
-    text-decoration: underline;
-    color: black;
-    background-color: #858382;
-    margin-top: 5px;
-    margin-bottom: 0px;
-}
-.tituloCarrito p{
-    color: black;
+.btnFiltros{
+    display: flex;
+    justify-content: space-between;
+    background-color:#008F8C;
+    align-items: center;
 }
