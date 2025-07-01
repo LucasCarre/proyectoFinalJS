@@ -27,7 +27,7 @@
 .titulos{
     font-family: "Forum", serif;
     font-style: normal;
-    color: black;
+    color: white;
     background-color:#008F8C;
     display: flex;
     flex-direction: column;
@@ -48,6 +48,9 @@
     justify-content: space-between;
     align-items: center;
 }
+.tituloHeader{
+    color: white;
+}
 
 /* Carrito */
 .contenedorCarrito{
@@ -66,7 +69,7 @@ p{
     font-family: "Forum", serif;
     font-style: normal;
     text-decoration: underline;
-    color: black;
+    color: white;
     background-color: #008F8C;
 }
 .btnFiltros{
@@ -74,4 +77,14 @@ p{
     justify-content: space-between;
     background-color:#008F8C;
     align-items: center;
+}
+
+/* Footer */
+footer{
+    background-color: #023535;
+    text-align: center;
+    padding-top: 10px;
+}
+footer p{
+    color: white;
 }

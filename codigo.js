@@ -23,7 +23,7 @@
         const botones = document.querySelectorAll(".botonCarrito");
         botones.forEach((boton, i) => {
         boton.addEventListener("click", () => {
-        agregarAlCarrito(camisetas[i]); 
+        agregarAlCarrito(lista[i]); 
         });
         });
     }
@@ -175,3 +175,13 @@
         camisetas = data;
         mostrarProductos(camisetas);
     })
+
+    const nodoFooter = document.getElementById('footer')
+    nodoFooter.innerHTML += `
+    <p>© 2025 Hincha Store | Todos los derechos reservados</p>
+    <div class="footer-links">
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="mailto:contacto@hinchastore.com">Contacto</a>
+    </div>
+    `
