@@ -88,3 +88,13 @@ footer{
 footer p{
     color: white;
 }
+.itemCarrito{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carroDeCompras{
+    background-color: #023535;
+    color: white;
+}

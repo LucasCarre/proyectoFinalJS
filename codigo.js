@@ -35,7 +35,7 @@
         Toastify({
             text: `Producto ${producto.equipo}, agregado al carrito`,
             duration: 2000,
-            gravity: "top",
+            gravity: "bottom",
             position: "right",
             backgroundColor: "#5C5B5A",
         }).showToast();
@@ -72,7 +72,7 @@
             nodoCarrito.innerHTML += `
             <div class='itemCarrito'>
                 <p>${producto.equipo} - $${producto.precio}</p>
-                <button class="eliminarProducto">Eliminar</button>
+                <button class="btn btn-secondary eliminarProducto">Eliminar</button>
             </div>
             `;
         })
